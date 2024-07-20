@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phổ Hấp Thụ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .spectrum {
+            display: flex;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to right, 
+                violet, indigo, blue, green, yellow, orange, red);
+            margin-bottom: 20px;
+        }
+        .absorption-line {
+            position: relative;
+            height: 100px;
+            background-color: black;
+        }
+        .wavelength {
+            display: flex;
+            justify-content: space-between;
+        }
+        .wavelength span {
+            position: relative;
+            top: -20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Phổ Hấp Thụ</h1>
+    <div class="spectrum"></div>
+    <div class="wavelength">
+        <span>380 nm</span>
+        <span>450 nm</span>
+        <span>495 nm</span>
+        <span>570 nm</span>
+        <span>590 nm</span>
+        <span>620 nm</span>
+        <span>750 nm</span>
+    </div>
+    <script>
+        const spectrum = document.querySelector('.spectrum');
+        
+        function addAbsorptionLine(position) {
+            const line = document.createElement('div');
+            line.classList.add('absorption-line');
+            line.style.left = position + '%';
+            line.style.width = '2px';
+            spectrum.appendChild(line);
+        }
+        
+        // Add absorption lines at specific positions (in percentages)
+        addAbsorptionLine(10); // Example: Add absorption line at 10% of the spectrum width
+        addAbsorptionLine(50); // Example: Add absorption line at 50% of the spectrum width
+        addAbsorptionLine(90); // Example: Add absorption line at 90% of the spectrum width
+    </script>
+</body>
+</html>
