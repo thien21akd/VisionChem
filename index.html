@@ -321,6 +321,16 @@
                 case "H2O":
                     detectedObjectElement.innerText = "H2O (Nước)";
                     break;
+                    case "K2Cr2O7":
+                    if (pHValue >= 2 && pHValue <= 4 && readKValue() == 671) {
+                        detectedObjectElement.innerText = "K2Cr2O7 ở mức an toàn";
+                        if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
+                            window.location.href = 'ungdungK2Cr2O7.html';
+                        }
+                    } else {
+                        detectedObjectElement.innerText = "K2Cr2O7 (nguy hiểm)";
+                    }
+                    break;
                 case "NaOH":
                     if (pHValue >= 13 && pHValue <= 14) {
                         detectedObjectElement.innerText = "NaOH";
@@ -408,6 +418,8 @@
                 return "FeCl2";
             } else if ((pH >= 6.50 && pH <= 8.50)&& r>=150 && g>= 150 && b >= 150){
                 return "H2O";
+            } else if (pH>=2 && pH<=4 && r >= 180 && g < 115 && b < 115){
+                return "K2Cr2O7";
             }
             else {
                 return "Chưa phát hiện chất hóa học";
