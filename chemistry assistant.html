@@ -101,17 +101,68 @@
 
     <script>
         const qaPairs = [
-            { question: 'Xin chào', answer: 'Xin chào! Tôi là chatbot hóa học. Tôi có thể giúp gì cho bạn hôm nay?' },
-            { question: 'Bạn tên gì?', answer: 'Tôi là một trợ lý ảo trong lĩnh vực hóa học.' },
-            { question: 'Tạm biệt', answer: 'Tạm biệt! Hãy quay lại nếu bạn cần thêm thông tin.' },
-            { question: 'Thời tiết hôm nay', answer: 'Tôi không có thông tin thời tiết, nhưng tôi có thể giúp bạn với các vấn đề hóa học!' },
-            { question: 'Bạn biết nói tiếng Anh không?', answer: 'Có, tôi có thể giao tiếp bằng cả tiếng Anh và tiếng Việt.' },
-            { question: 'Cám ơn', answer: 'Rất vui được giúp đỡ!' },
-            { question: 'pH của nước tinh khiết', answer: 'Nước tinh khiết có pH xấp xỉ 7.' },
-            { question: 'HCl là gì?', answer: 'HCl là axit clohidric, một axit mạnh được sử dụng rộng rãi trong phòng thí nghiệm và công nghiệp.' },
-            { question: 'Tính chất của NaCl', answer: 'NaCl, hay còn gọi là muối ăn, là một hợp chất ion của natri và clo. Nó tan trong nước và có nhiều ứng dụng trong thực phẩm và công nghiệp.' }
+            { 
+                question: 'Xin chào', 
+                answer: 'Xin chào! Tôi là chatbot hóa học. Tôi có thể giúp gì cho bạn hôm nay?' 
+            },
+            { 
+                question: 'hello', 
+                answer: 'Xin chào! Tôi là chatbot hóa học. Tôi có thể giúp gì cho bạn hôm nay?' 
+            },
+            { 
+                question: 'Hello', 
+                answer: 'Xin chào! Tôi là chatbot hóa học. Tôi có thể giúp gì cho bạn hôm nay?' 
+            },
+            { 
+                question: 'HELLO', 
+                answer: 'Xin chào! Tôi là chatbot hóa học. Tôi có thể giúp gì cho bạn hôm nay?' 
+            },
+            { 
+                question: 'Hi', 
+                answer: 'Xin chào! Tôi là chatbot hóa học. Tôi có thể giúp gì cho bạn hôm nay?' 
+            },
+            { 
+                question: 'hi', 
+                answer: 'Xin chào! Tôi là chatbot hóa học. Tôi có thể giúp gì cho bạn hôm nay?' 
+            },
+            { 
+                question: 'HI', 
+                answer: 'Xin chào! Tôi là chatbot hóa học. Tôi có thể giúp gì cho bạn hôm nay?' 
+            },
+            { 
+                question: 'Bạn tên gì?', 
+                answer: 'Tôi là một trợ lý ảo trong lĩnh vực hóa học.' 
+            },
+            { 
+                question: 'Tạm biệt', 
+                answer: 'Tạm biệt! Hãy quay lại nếu bạn cần thêm thông tin.' 
+            },
+            { 
+                question: 'Thời tiết hôm nay', 
+                answer: 'Tôi không có thông tin thời tiết, nhưng tôi có thể giúp bạn với các vấn đề hóa học!' 
+            },
+            { 
+                question: 'Bạn biết nói tiếng Anh không?', 
+                answer: 'Có, tôi có thể giao tiếp bằng cả tiếng Anh và tiếng Việt.' 
+            },
+            { 
+                question: 'Cám ơn', 
+                answer: 'Rất vui được giúp đỡ!' 
+            },
+            { 
+                question: 'pH của nước tinh khiết', 
+                answer: 'Nước tinh khiết có pH xấp xỉ 7.' 
+            },
+            { 
+                question: 'HCl là gì?', 
+                answer: 'HCl là axit clohidric, một axit mạnh được sử dụng rộng rãi trong phòng thí nghiệm và công nghiệp.' 
+            },
+            { 
+                question: 'Tính chất của NaCl', 
+                answer: 'NaCl, hay còn gọi là muối ăn, là một hợp chất ion của natri và clo. Nó tan trong nước và có nhiều ứng dụng trong thực phẩm và công nghiệp.' 
+            }
         ];
-
+        
         document.getElementById('send-button').addEventListener('click', () => {
             const userInput = document.getElementById('user-input').value.trim();
             if (userInput === '') return;
