@@ -243,7 +243,7 @@
             <p>Chất hóa học phát hiện: <span id="detectedObject">Chưa xác định</span></p>
         </div>
         <div class="announcement">
-            <div class="announcement-icon">&#8505;</div> <!-- Information icon -->
+            <div class="announcement-icon">&#8505;</div> 
             <div class="announcement-text">
                 Nếu như là chất rắn, không phải dung dịch thì bạn nên nhập độ pH = 0.0 và nhập độ K để xem thông tin về chất ấy
             </div>
@@ -374,11 +374,20 @@
                     } else {
                         detectedObjectElement.innerText = "K2Cr2O7 (nguy hiểm)";
                     }
+                    break;
                 case "CaO":
                 if(readKValue() == 2886){
                     detectedObjectElement.innerText = "CaO";
                     if(confirm("Bạn có muốn tìm hiểu về chất này không?")){
                         window.location.href = 'ungdungCaO.html';
+                    }
+                }
+                    break;
+                case "Ca(OH)2":
+                if(pHValue >=12 && pHValue <= 13 && readKValue() == 853){
+                    detectedObjectElement.innerText = "Ca(OH)2";
+                    if(confirm("Bạn có muốn tìm hiểu về chất này không?")){
+                        window.location.href = 'ungdungCa(OH)2.html';
                     }
                 }
                     break;
@@ -472,8 +481,10 @@
                 return "H2O";
             } else if (pH>=2 && pH<=4 && r >= 180 && g < 115 && b < 115){
                 return "K2Cr2O7";
-            } else if (r >= 160 && g >= 160 && b >= 160){
+            } else if (pH == 0.0 && r >= 160 && g >= 160 && b >= 160){
                 return "CaO";
+            } else if ((pH >= 12 && pH<=13 && r >= 150 && g >= 150 && b >= 150)|| (pH >= 12 && pH<=13 && r >= 160 && g >= 160 && b >= 160 )){
+                return "Ca(OH)2";
             }
             else {
                 return "Chưa phát hiện chất hóa học";
