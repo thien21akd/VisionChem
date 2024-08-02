@@ -391,6 +391,22 @@
                     }
                 }
                     break;
+                case "HCl":
+                if(pHValue >= 0 && pHValue <=2 && readKValue() == 158,8){
+                    detectedObjectElement.innerText = "HCl";
+                    if(confirm("Bạn có muốn tìm hiểu về chất này không?")){
+                        window.location.href = 'ungdungHCl.html';
+                    }
+                }
+                    break;
+                case "H2SO4":
+                if(pHValue >= 0 && pHValue <=2 && readKValue() == 283){
+                    detectedObjectElement.innerText = "H2SO4";
+                    if(confirm("Bạn có muốn tìm hiểu về chất này không?")){
+                        window.location.href = 'ungdungH2SO4.html';
+                    }
+                }
+                    break;
                 case "NaOH":
                     if (pHValue >= 13 && pHValue <= 14) {
                         detectedObjectElement.innerText = "NaOH";
@@ -485,6 +501,10 @@
                 return "CaO";
             } else if ((pH >= 12 && pH<=13 && r >= 150 && g >= 150 && b >= 150)|| (pH >= 12 && pH<=13 && r >= 160 && g >= 160 && b >= 160 )){
                 return "Ca(OH)2";
+            } else if(pH >= 0 && pH <=2 && r >= 150 && g >= 150 && b >= 150){
+                return "HCl";
+            } else if(pH >= 0 && pH <=2 && r >= 150 && g >= 150 && b >= 150){
+                return "H2SO4";
             }
             else {
                 return "Chưa phát hiện chất hóa học";
