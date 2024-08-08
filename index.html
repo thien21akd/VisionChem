@@ -24,11 +24,10 @@
             color: white; /* White text for contrast */
             padding: 20px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            flex-wrap: wrap;
             position: relative; /* Positioning for pseudo-element */
+            flex-wrap: wrap;
         }
         header::before {
             content: '';
@@ -45,6 +44,41 @@
             margin: 0;
             font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for emphasis */
+            flex: 1; /* Allows the title to take up available space */
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 2; /* Allows the search bar to take up more space */
+            margin: 0 20px; /* Margins for spacing */
+        }
+        
+        #searchBar {
+            width: calc(100% - 40px); /* Điều chỉnh chiều rộng của thanh tìm kiếm */
+    max-width: 100%; /* Maximum width of the search bar */
+            padding: 14px;
+            font-size: 1.2em;
+            border: 2px solid #004d40; /* Dark teal border */
+            border-radius: 20px; /* Rounded corners */
+            box-sizing: border-box;
+            margin-right: 5px; 
+            margin-left: -100px;/* Space between search bar and button */
+        }
+        
+        #searchButton {
+            background-color: #00796b; /* Dark teal button */
+            color: white;
+            border: none;
+            border-radius: 20px; /* Rounded button */
+            padding: 14px 20px; /* Larger padding */
+            font-size: 1.2em; /* Larger font size */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        #searchButton:hover {
+            background-color: #004d40; /* Dark teal button on hover */
         }
         header .nav {
             display: flex;
@@ -182,10 +216,14 @@
             header h1 {
                 font-size: 2.5em; /* Adjusted font size for smaller screens */
             }
+            .search-container {
+                width: 100%;
+            }
             .nav {
                 width: 100%;
                 display: flex;
                 justify-content: space-around;
+                margin-left: 0; /* Reset margin for navigation links on smaller screens */
             }
         }
         /* Announcement section styles */
@@ -225,12 +263,17 @@
 <body>
     <header>
         <h1>VisionChem</h1>
+        <div class="search-container">
+            <input type="text" id="searchBar" placeholder="Tìm kiếm...">
+            <button id="searchButton">🔍</button>
+        </div>
         <nav class="nav">
             <a href="products.html">Sản phẩm</a>
             <a href="chemical_substances.html">Chất hóa học</a>
-            <a href = "chemistry assistant.html">Trợ lý hóa học</a>
+            <a href="chemistry_assistant.html">Trợ lý hóa học</a>
         </nav>
     </header>
+    
     <div class="container">
         <video id="video" width="640" height="480" autoplay></video>
         <canvas id="canvas" width="640" height="480"></canvas>
@@ -505,7 +548,7 @@
                 return "HCl";
             } else if(pH >= 0 && pH <=2 && r >= 150 && g >= 150 && b >= 150){
                 return "H2SO4";
-            }
+            } 
             else {
                 return "Chưa phát hiện chất hóa học";
             }
