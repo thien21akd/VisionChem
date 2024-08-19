@@ -7,6 +7,7 @@
     <meta name="description" content="Tìm hiểu về tính chất vật lý của CuSO4.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Font Awesome -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
         
@@ -113,26 +114,36 @@
         }
         
         /* Product link styles */
-        #product_general {
-            color: #0073e6; /* Blue color */
-            text-align: center;
-            font-size: 3em;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.3s;
-            text-decoration: none;
-            position: relative;
-            z-index: 1;
-        }
-        #product_general a {
-            color: inherit;
-            text-decoration: none;
-        }
-        #product_general:hover {
-            color: #005bb5; /* Darker blue on hover */
-            transform: scale(1.05);
-        }
+        /* Product link styles */
+#product_general {
+    color: #0073e6; /* Blue color */
+    text-align: center;
+    font-size: 2.5em; /* Larger font size for icons */
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#product_general a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+#product_general i {
+    margin-right: 15px; /* Increased space between icon and text */
+    font-size: 1.5em; /* Larger icon size */
+}
+#product_general:hover {
+    color: #005bb5; /* Darker blue on hover */
+    transform: scale(1.05);
+}
+
     </style>
-    
 </head>
 <body>
     <header>
@@ -140,13 +151,13 @@
     </header>
     <main>
         <section>
-            <div id="product_general"><a href="axit.html">Acid</a></div>
+            <div id="product_general"><a href="axit.html"><i class="fa-solid fa-flask"></i> Acid</a></div>
         </section>
         <section>
-            <div id="product_general"><a href="bazo.html">Base - Oxide Base</a></div>
+            <div id="product_general"><a href="bazo.html"><i class="fa-solid fa-vial"></i> Base - Oxide Base</a></div>
         </section>
         <section>
-            <div id = "product_general"><a href = "muoi.html">Muối</a></div>
+            <div id="product_general"><a href="muoi.html"><i class="fa-solid fa-cube"></i> Muối</a></div>
         </section>
     </main>
     <footer>
