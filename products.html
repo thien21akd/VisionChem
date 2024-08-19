@@ -7,6 +7,7 @@
     <meta name="description" content="Tìm hiểu về tính chất vật lý của CuSO4.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
         
@@ -66,6 +67,8 @@
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
         }
         section:hover {
             transform: translateY(-5px);
@@ -116,12 +119,15 @@
         #product_general {
             color: #0073e6; /* Blue color */
             text-align: center;
-            font-size: 3em;
+            font-size: 2.5em;
             cursor: pointer;
             transition: color 0.3s, transform 0.3s;
             text-decoration: none;
             position: relative;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         #product_general a {
             color: inherit;
@@ -131,22 +137,25 @@
             color: #005bb5; /* Darker blue on hover */
             transform: scale(1.05);
         }
+        #product_general i {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
     </style>
-    
 </head>
 <body>
     <header>
-        <h1>Cách Làm Một Số Sản Phẩm Bằng Chất Hóa Học</h1>
+        <h1>Cách làm một số sản phẩm bằng chất hóa học</h1>
     </header>
     <main>
         <section>
-            <div id="product_general"><a href="xaphong.html">Xà phòng</a></div>
+            <div id="product_general"><i class="fas fa-soap"></i><a href="xaphong.html">Xà phòng</a></div>
         </section>
         <section>
-            <div id="product_general"><a href="nuocruataykho.html">Nước rửa tay khô</a></div>
+            <div id="product_general"><i class="fas fa-pump-soap"></i><a href="nuocruataykho.html">Nước rửa tay khô</a></div>
         </section>
         <section>
-            <div id = "product_general"><a href = "thuoctrusau.html">Thuốc trừ sâu Bordeaux</a></div>
+            <div id="product_general"><i class="fas fa-spray-can"></i><a href="thuoctrusau.html">Thuốc trừ sâu</a></div>
         </section>
     </main>
     <footer>
