@@ -55,7 +55,7 @@
         }
         
         #searchBar {
-            width: calc(100% - 40px); /* Điều chỉnh chiều rộng của thanh tìm kiếm */
+            width: calc(100% - 50px); /* Điều chỉnh chiều rộng của thanh tìm kiếm */
     max-width: 100%; /* Maximum width of the search bar */
             padding: 14px;
             font-size: 1.2em;
@@ -281,14 +281,12 @@
         <div class="output">
             <label for="phInput">Độ pH:</label>
             <input type="number" id="phInput" min="0" max="14" step="0.01" value="7.00">
-            <label for="KInput">Độ K:</label>
-            <input type="number" id="KInput" min="0" step="0.5" value="0">
             <p>Chất hóa học phát hiện: <span id="detectedObject">Chưa xác định</span></p>
         </div>
         <div class="announcement">
             <div class="announcement-icon">&#8505;</div> 
             <div class="announcement-text">
-                Nếu như là chất rắn, không phải dung dịch thì bạn nên nhập độ pH = 0.0 và nhập độ K để xem thông tin về chất ấy
+                Nếu như là chất rắn, không phải dung dịch thì bạn nên nhập độ pH = 0.0 để xem thông tin về chất ấy
             </div>
         </div>
 
@@ -375,97 +373,66 @@
             const { r, g, b } = getBGR(canvas.width / 2, canvas.height / 2);
             const detectedChemical = checkForChemicalSubstances(r, g, b, pHValue);
             saveAnalysisToLocalStorage(pHValue, detectedChemical);
-            switch (detectedChemical) {
-                case "Cl2":
-                    detectedObjectElement.innerText = "Cl2 (Clo)";
-                    break;
-                case "CuSO4":
-                    if (pHValue >= 6.8 && pHValue <= 7.2 && readKValue() == 423) {
-                        detectedObjectElement.innerText = "CuSO4 (Đồng sulfat an toàn)";
-                        if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
-                            window.location.href = 'ungdungCuSO4.html';
-                        }
-                    } else {
-                        detectedObjectElement.innerText = "CuSO4 (Đồng sulfat có độc)";
-                    }
-                    break;
-                case "KMnO4":
-                    if (pHValue >= 8) {
-                        detectedObjectElement.innerText = "KMnO4 (Kali permanganat)";
-                        if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
-                            window.location.href = 'ungdungKMnO4.html';
-                        }
-                    }
-                    break;
-                case "FeCl2":
-                    if (pHValue <= 6) {
-                        detectedObjectElement.innerText = "FeCl2 (Sắt(II) clorua)";
-                        if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
-                            window.location.href = 'ungdungFeCl2.html';
-                        }
-                    }
-                    break;
-                case "H2O":
-                    detectedObjectElement.innerText = "H2O (Nước)";
-                    break;
-                case "K2Cr2O7":
-                    if (pHValue >= 2 && pHValue <= 4 && readKValue() == 671) {
-                        detectedObjectElement.innerText = "K2Cr2O7 ở mức an toàn";
-                        if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
-                            window.location.href = 'ungdungK2Cr2O7.html';
-                        }
-                    } else {
-                        detectedObjectElement.innerText = "K2Cr2O7 (nguy hiểm)";
-                    }
-                    break;
-                case "CaO":
-                if(readKValue() == 2886){
-                    detectedObjectElement.innerText = "CaO";
-                    if(confirm("Bạn có muốn tìm hiểu về chất này không?")){
-                        window.location.href = 'ungdungCaO.html';
-                    }
+            
+            // Nhóm chất axit và bazơ-oxit
+            const acidsAndBases = ["HCl", "H2SO4", "CaO", "Ca(OH)2", "NaOH"];
+            
+            if (acidsAndBases.includes(detectedChemical)) {
+                detectedObjectElement.innerText = "Chất thuộc nhóm axit hoặc bazơ-oxit";
+                if (confirm("Bạn có muốn tìm hiểu về nhóm chất này không?")) {
+                    window.location.href = 'ungdungAcidBase.html'; // Cập nhật URL phù hợp
                 }
-                    break;
-                case "Ca(OH)2":
-                if(pHValue >=12 && pHValue <= 13 && readKValue() == 853){
-                    detectedObjectElement.innerText = "Ca(OH)2";
-                    if(confirm("Bạn có muốn tìm hiểu về chất này không?")){
-                        window.location.href = 'ungdungCa(OH)2.html';
-                    }
-                }
-                    break;
-                case "HCl":
-                if(pHValue >= 0 && pHValue <=2 && readKValue() == 158,8){
-                    detectedObjectElement.innerText = "HCl";
-                    if(confirm("Bạn có muốn tìm hiểu về chất này không?")){
-                        window.location.href = 'ungdungHCl.html';
-                    }
-                }
-                    break;
-                case "H2SO4":
-                if(pHValue >= 0 && pHValue <=2 && readKValue() == 283){
-                    detectedObjectElement.innerText = "H2SO4";
-                    if(confirm("Bạn có muốn tìm hiểu về chất này không?")){
-                        window.location.href = 'ungdungH2SO4.html';
-                    }
-                }
-                    break;
-                case "NaOH":
-                    if (pHValue >= 13 && pHValue <= 14) {
-                        detectedObjectElement.innerText = "NaOH";
-                        if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
-                            window.location.href = 'ungdungNaOH.html';
+            } else {
+                switch (detectedChemical) {
+                    case "Cl2":
+                        detectedObjectElement.innerText = "Cl2 (Clorine)";
+                        break;
+                    case "CuSO4":
+                        if (pHValue >= 6.8 && pHValue <= 7.2) {
+                            detectedObjectElement.innerText = "CuSO4 (Đồng sulfat an toàn)";
+                            if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
+                                window.location.href = 'ungdungCuSO4.html';
+                            }
+                        } else {
+                            detectedObjectElement.innerText = "CuSO4 (Đồng sulfat có độc)";
                         }
-                    } else {
-                        detectedObjectElement.innerText = "NaOH (nguy hiểm)";
-                    }
-                    break;
-                default:
-                    detectedObjectElement.innerText = "Chưa phát hiện chất hóa học";
-                    break;
+                        break;
+                    case "KMnO4":
+                        if (pHValue >= 8) {
+                            detectedObjectElement.innerText = "KMnO4 (Kali permanganat)";
+                            if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
+                                window.location.href = 'ungdungKMnO4.html';
+                            }
+                        }
+                        break;
+                    case "FeCl2":
+                        if (pHValue <= 6) {
+                            detectedObjectElement.innerText = "FeCl2 (Sắt(II) clorua)";
+                            if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
+                                window.location.href = 'ungdungFeCl2.html';
+                            }
+                        }
+                        break;
+                    case "H2O":
+                        detectedObjectElement.innerText = "H2O (Nước)";
+                        break;
+                    case "K2Cr2O7":
+                        if (pHValue >= 2 && pHValue <= 4) {
+                            detectedObjectElement.innerText = "K2Cr2O7 ở mức an toàn";
+                            if (confirm("Bạn có muốn tìm hiểu về chất này không?")) {
+                                window.location.href = 'ungdungK2Cr2O7.html';
+                            }
+                        } else {
+                            detectedObjectElement.innerText = "K2Cr2O7 (nguy hiểm)";
+                        }
+                        break;
+                    default:
+                        detectedObjectElement.innerText = "Chưa phát hiện chất hóa học";
+                        break;
+                }
             }
         }
-    
+        
         function drawCircle(x, y) {
             context.strokeStyle = 'rgb(255, 255, 255)'; // Màu trắng
             context.lineWidth = 2;
@@ -473,12 +440,12 @@
             context.arc(x, y, 10, 0, 2 * Math.PI); // Thay đổi kích thước của chấm tròn ở đây
             context.stroke();
         }
-    
+        
         function getBGR(x, y) {
             const frame = context.getImageData(x, y, 1, 1).data;
             return { r: frame[0], g: frame[1], b: frame[2] };
         }
-    
+        
         function getColorName(r, g, b) {
             if (r >= 180 && g >= 180 && b < 100) {
                 return "Vàng";
@@ -496,13 +463,13 @@
                 return "Tím";
             } else if (r >= 220 && g >= 150 && b <= 10) {
                 return "Cam";
-            } else if (r >= 150 && g >= 150 && b >= 150){
+            } else if (r >= 150 && g >= 150 && b >= 150) {
                 return "Không màu";
             }
-    
+        
             let minimum = Infinity;
             let name = "Chưa xác định";
-    
+        
             for (const row of csvData) {
                 const d = Math.sqrt(
                     Math.pow(r - parseInt(row.R), 2) +
@@ -516,7 +483,7 @@
             }
             return name;
         }
-    
+        
         function putText(x, y, r, g, b) {
             const cname = getColorName(r, g, b);
             const text = `${cname} | R=${r} G=${g} B=${b}`;
@@ -524,36 +491,39 @@
             context.font = "20px Arial";
             context.fillText(text, x - 75, y - 90);
         }
-    
+        
         function checkForChemicalSubstances(r, g, b, pH) {
+            // Nhóm chất axit và bazơ-oxit
+            const acidsAndBases = ["HCl", "H2SO4", "CaO", "Ca(OH)2", "NaOH"];
+        
             if (pH >= 3 && pH <= 5 && r >= 180 && g >= 180 && b < 100) {
                 return "Cl2";
             } else if (pH >= 6.8 && pH <= 7.2 && r < 100 && g >= 100 && b >= 180) {
                 return "CuSO4";
-            } else if (pH>=13 && pH<=14&& r >= 150 && g >= 150 && b >= 150) {
+            } else if (pH >= 13 && pH <= 14 && r >= 150 && g >= 150 && b >= 150) {
                 return "NaOH";
             } else if (pH >= 8 && r <= 220 && g <= 100 && b >= 200) {
                 return "KMnO4";
             } else if (pH <= 6 && g >= 200 && r < 200 && b < 200) {
                 return "FeCl2";
-            } else if ((pH >= 6.50 && pH <= 8.50)&& r>=150 && g>= 150 && b >= 150){
+            } else if (pH >= 6.50 && pH <= 8.50 && r >= 150 && g >= 150 && b >= 150) {
                 return "H2O";
-            } else if (pH>=2 && pH<=4 && r >= 180 && g < 115 && b < 115){
+            } else if (pH >= 2 && pH <= 4 && r >= 180 && g < 115 && b < 115) {
                 return "K2Cr2O7";
-            } else if (pH == 0.0 && r >= 160 && g >= 160 && b >= 160){
+            } else if (pH == 0.0 && r >= 160 && g >= 160 && b >= 160) {
                 return "CaO";
-            } else if ((pH >= 12 && pH<=13 && r >= 150 && g >= 150 && b >= 150)|| (pH >= 12 && pH<=13 && r >= 160 && g >= 160 && b >= 160 )){
+            } else if ((pH >= 12 && pH <= 13 && r >= 150 && g >= 150 && b >= 150) || 
+                       (pH >= 12 && pH <= 13 && r >= 160 && g >= 160 && b >= 160)) {
                 return "Ca(OH)2";
-            } else if(pH >= 0 && pH <=2 && r >= 150 && g >= 150 && b >= 150){
-                return "HCl";
-            } else if(pH >= 0 && pH <=2 && r >= 150 && g >= 150 && b >= 150){
+            } else if (pH >= 0 && pH <= 2 && r >= 150 && g >= 150 && b >= 150) {
+                return "HCl"; // hoặc "H2SO4"
+            } else if (pH >= 0 && pH <= 2 && r >= 150 && g >= 150 && b >= 150) {
                 return "H2SO4";
             } 
             else {
                 return "Chưa phát hiện chất hóa học";
             }
         }
-    
         function setupCamera() {
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then((stream) => {
